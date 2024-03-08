@@ -23,7 +23,7 @@ int partition(int[] nums, int left, int right) {
         nums[j] = temp;
     }
     // 交换头和第i个
-    temp = nums[i];
+    int temp = nums[i];
     nums[i] = nums[left];
     nums[left] = temp;
     return i;
