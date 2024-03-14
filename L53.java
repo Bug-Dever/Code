@@ -35,7 +35,7 @@ class Solution {
     public int lower_bound(int []nums, int target) {
         int left = 0, right = nums.length - 1, mid;
         while(left <= right) {
-            mid = (left + right) / 2;
+            mid = left + (right - left) / 2;   // 防溢出!!
             if(nums[mid] < target) {
                 left = mid + 1;
             } else {
