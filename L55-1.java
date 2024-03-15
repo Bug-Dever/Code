@@ -33,7 +33,14 @@ class Solution {
     }
 }
 
-
+// DFS简化写法
+class Solution {
+    public int calculateDepth(TreeNode root) {
+        if(root == null)
+            return 0;
+        return Math.max(calculateDepth(root.left), calculateDepth(root.right)) + 1;        
+    }
+}
 
 /**
  * Definition for a binary tree node.
