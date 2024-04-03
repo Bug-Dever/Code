@@ -42,9 +42,8 @@ class Solution {
 
 // 时空都是O(n)
 class Solution {
-    Map<Integer, Integer> map = new HashMap<>();
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        
+        Map<Integer, Integer> map = new HashMap<>();
         // 将inorder加入到HashMap中
         for(int i = 0; i < inorder.length; i++) {
             map.put(inorder[i], i);
@@ -54,7 +53,7 @@ class Solution {
         
     }
     public TreeNode recur(int[] preorder, int preL, int preR, int[] inorder, int inL, int inR, Map<Integer, Integer> map) {
-        // 作用：找到根节点、左右树的节点
+        // 作用：找到根节点、左右树的节点 左闭右开区间
         if(preL == preR) {
             return null;
         }
