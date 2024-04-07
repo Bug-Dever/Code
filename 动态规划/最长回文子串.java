@@ -32,3 +32,31 @@ class Solution {
         return s.substring(start, start + maxLen);
     }
 }
+
+// 中间扩散，时间O(n^2) 空间复杂度O(1)
+class Solution {
+    int start = 0, maxLen = 1;
+
+    public String longestPalindrome(String s) {
+        char[] arr = s.toCharArray();
+        for(int i = 0; i < arr.length - 1; i++) {
+            // 回文长度为奇数
+            centerSpread(arr, i, i);
+            // 回文长度为偶数
+            centerSpread(arr, i, i + 1);
+        }
+        return s.substring(start, start + maxLen);
+    }
+
+    public void centerSpread(char[] arr, int i, int j) {
+        while(i >= 0 && j < arr.length && arr[i] == arr[j]) {
+            i--; j++;
+        }
+        if((j-1) - (i+1) + 1 > maxLen) {
+            maxLen = j - i - 1;
+            start = i + 1;
+        }
+    }
+}
+
+
