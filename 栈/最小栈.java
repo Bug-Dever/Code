@@ -29,3 +29,5 @@ class MinStack {
         return minStack.peek();
     }
 }
+
+// 还可以改变数据结构，不用stack，用一个链表实现，只需在链表中多一个min字段即可。
