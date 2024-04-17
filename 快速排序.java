@@ -13,7 +13,7 @@ void quickSort(int[] nums, int left, int right) {
 int partition(int[] nums, int left, int right) {
     int i = left, j = right;
     while(i < j) {
-        while(i < j && nums[j] >= nums[right])
+        while(i < j && nums[j] >= nums[left])
             j--;
         while(i < j && nums[i] <= nums[left])
             i++;
