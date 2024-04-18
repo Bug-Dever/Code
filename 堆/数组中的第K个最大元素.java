@@ -1,4 +1,4 @@
-// 小顶堆 -> 优先队列实现
+// 法一：小顶堆 -> 优先队列实现
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         Queue<Integer> minHeap = new PriorityQueue<>();
@@ -19,7 +19,60 @@ class Solution {
     }
 }
 
-// 快排
+// 法二：手写一个堆
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        buildMinHeap(nums, k);
+        for(int i = k; i < nums.length; i++) {
+            if(nums[i] > nums[0]) {
+                nums[0] = nums[i];
+                minHeapify(nums, k, 0);
+            }
+        }
+        return nums[0];
+    }
+
+    int left(int i) {
+        return 2 * i + 1;
+    }
+    int right(int i) {
+        return 2 * i + 2;
+    }
+    int parent(int i) {
+        return (i - 1) / 2;
+    }
+    void buildMinHeap(int[] nums, int heapSize) {
+        // 最后一个元素的索引是 k - 1，即headSize - 1
+        for(int i = parent(heapSize - 1); i >= 0; i--) {
+            minHeapify(nums, heapSize, i);
+        }
+    }
+    void minHeapify(int[] nums, int heapSize, int i) {
+        while (true) {
+        // 判断节点 i, l, r 中值最小的节点，记为 min
+        int l = left(i), r = right(i), min = i;
+        if (l < heapSize && nums[l] < nums[min])
+            min = l;
+        if (r < heapSize && nums[r] < nums[min])
+            min = r;
+        // 若节点 i 最小或索引 l, r 越界，则无须继续堆化，跳出
+        if (min == i)
+            break;
+        // 交换两节点
+        swap(nums, i, min);
+        // 循环向下堆化
+        i = min;
+        }
+    }
+
+    void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+}
+
+// 法三：快排（快速选择）
 class Solution {
     private final static Random random = new Random(System.currentTimeMillis());
     public int findKthLargest(int[] nums, int k) {
