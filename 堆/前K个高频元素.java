@@ -1,7 +1,8 @@
-// 手写一个小顶堆实现
+// 注意：建堆时比较的是map中的key对应的value的值，而不是key的值
 class Solution {
+    Map<Integer, Integer> map = new HashMap<>();
     public int[] topKFrequent(int[] nums, int k) {
-        Map<Integer, Integer> map = new HashMap<>();
+
         // 统计各个数字出现的次数
         for(int num : nums) {
             map.put(num, map.getOrDefault(num, 0) + 1);
@@ -34,12 +35,12 @@ class Solution {
     }
 
     void minHeapify(int[] nums, int heapSize, int i) {
-        int l = left(i), r = right(i), min = i;
         while(true) {
-            if(l < heapSize && nums[l] < nums[min]) {
+            int l = left(i), r = right(i), min = i;
+            if(l < heapSize && map.get(nums[l]) < map.get(nums[min])) {
                 min = l;
             }
-            if(r < heapSize && nums[r] < nums[min]) {
+            if(r < heapSize && map.get(nums[r]) < map.get(nums[min])) {
                 min = r;
             }
             if(min == i)
