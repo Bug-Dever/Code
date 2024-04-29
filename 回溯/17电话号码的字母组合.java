@@ -1,3 +1,4 @@
+// 定义dfs函数(作用是选第i个及以后的元素)
 class Solution {
     int n;
     List<String> ans = new ArrayList<>();
