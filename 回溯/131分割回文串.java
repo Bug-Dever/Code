@@ -1,37 +1,39 @@
+// 法二：答案视角
 class Solution {
-    private final List<List<String>> ans = new ArrayList<>();
-    private final List<String> path = new ArrayList<>();
-    private String s;
-
+    List<List<String>> ans = new ArrayList<>();
+    List<String> path = new ArrayList<>();
+    String s;
+    int n;
     public List<List<String>> partition(String s) {
         this.s = s;
-        dfs(0, 0);
+        this.n = s.length();
+        dfs(0);
         return ans;
     }
-
-    private boolean isPalindrome(int left, int right) {
-        while (left < right)
-            if (s.charAt(left++) != s.charAt(right--))
-                return false;
-        return true;
-    }
-
-    // start 表示当前这段回文子串的开始位置
-    private void dfs(int i, int start) {
-        if (i == s.length()) {
-            ans.add(new ArrayList<>(path)); // 复制 path
+    public void dfs(int i) {    
+        if(i == n) {
+            ans.add(new ArrayList<>(path));
             return;
         }
-
-        // 不选 i 和 i+1 之间的逗号（i=n-1 时一定要选）
-        if (i < s.length() - 1)
-            dfs(i + 1, start);
-
-        // 选 i 和 i+1 之间的逗号（把 s[i] 作为子串的最后一个字符）
-        if (isPalindrome(start, i)) {
-            path.add(s.substring(start, i + 1));
-            dfs(i + 1, i + 1); // 下一个子串从 i+1 开始
-            path.remove(path.size() - 1); // 恢复现场
+            
+        for(int j = i; j < n; j++) {
+            // 枚举 j 作为子串的结束位置
+            String t = s.substring(i, j + 1);
+            if(isPalindrome(t)) {
+                path.add(t);
+                dfs(j + 1);
+                path.remove(path.size() - 1);
+            }   
         }
+    }
+    public boolean isPalindrome(String s) {
+        int left = 0, right = s.length() - 1;
+        while(left < right) {
+            if(s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+            left++; right--;
+        }
+        return true;
     }
 }
