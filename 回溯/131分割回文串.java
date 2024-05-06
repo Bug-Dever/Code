@@ -1,3 +1,44 @@
+// 法一：输入视角
+class Solution {
+    List<List<String>> ans = new ArrayList<>();
+    List<String> path = new ArrayList<>();
+    String s;
+    int n;
+    public List<List<String>> partition(String s) {
+        this.s = s;
+        this.n = s.length();
+        dfs(0, 0);
+        return ans;
+    }
+    public void dfs(int i, int start) {    
+        if(i == n) {
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        // 不选
+        if(i < n - 1) {
+            dfs(i + 1, start);
+        }
+        // 选
+        String t = s.substring(start, i + 1);
+        if(isPalindrome(t)) {
+            path.add(t);
+            dfs(i + 1, i + 1);
+            path.remove(path.size() - 1);
+        }
+    }
+    public boolean isPalindrome(String s) {
+        int left = 0, right = s.length() - 1;
+        while(left < right) {
+            if(s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+            left++; right--;
+        }
+        return true;
+    }
+}
+
 // 法二：答案视角
 class Solution {
     List<List<String>> ans = new ArrayList<>();
