@@ -16,11 +16,10 @@ class Solution {
         dummy.next = head;
         ListNode node = dummy;
         while(dummy.next != null && dummy.next.next != null) {
-            ListNode tmp1 = dummy.next;
-            ListNode tmp2 = dummy.next.next.next;
+            ListNode tmp = dummy.next;
             dummy.next = dummy.next.next;
-            dummy.next.next = tmp1;
-            tmp1.next = tmp2;
+            tmp.next = dummy.next.next;
+            dummy.next.next = tmp;
             dummy = dummy.next.next;
         }
         return node.next;
