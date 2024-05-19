@@ -22,7 +22,7 @@ public class Solution {
             if(fast == slow)    
                 break;
         }
-        fast = head;
+        fast = head; // 一个新的指针从头节点出发
         while(slow != fast) {
             slow = slow.next;
             fast = fast.next;
