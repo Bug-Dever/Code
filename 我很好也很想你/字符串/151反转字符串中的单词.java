@@ -1,4 +1,4 @@
-// 双指针
+// 双指针 从末尾向前
 class Solution {
     public String reverseWords(String s) {
         s = s.trim();
